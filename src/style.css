@@ -1,0 +1,295 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
+@font-face {
+	font-family: DSTRKT;
+	src: url(/fonts/26917.otf);
+}
+
+* {
+  margin: 0;
+  /* padding: 0; */
+}
+
+html,
+body {
+  overflow: hidden;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.loading-screen {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  background-image: url('/images/background.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.header {
+  width: 100%;
+}
+
+.header .text {
+  position: absolute;
+  width: 30%;
+  min-width: 200px;
+  left: 3%;
+  top: 3%;
+}
+
+.header .logo {
+  position: absolute;
+  width: 2%;
+  min-width: 30px;
+  right: 3%;
+  top: 3%;
+}
+
+div.body {
+  width: 100%;
+  font-weight: 100;
+  font-size: 1.5rem;
+  color: #C9F24F;
+  max-height: 75%;
+  overflow: hidden;
+  margin-bottom: 5%;
+  margin-left: 3%;
+}
+span.dud {
+  color: #757575;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(0.01);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(.92);
+  }
+  80% {
+    transform: scale(1.03);
+  }
+  90% {
+    transform: scale(.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* body,
+html {
+	height: 100%;
+	display: grid;
+	background-color: #ffdd40;
+	font-family: "Audiowide", cursive;
+	color: #333;
+} */
+
+.large {
+	font-size: 3rem;
+  color: #333;
+  font-family: "Audiowide", cursive;
+}
+
+.small {
+	font-size: 1.5rem;
+  font-family: "Audiowide", cursive;
+}
+
+.rise {
+	text-shadow: -0.01em -0.01em 0.01em #000;
+	animation: rise 2s ease-in-out 1.5s forwards;
+}
+
+@keyframes rise {
+	to {
+		text-shadow: 0em 0.01em #ff5, 0em 0.02em #ff5, 0em 0.02em 0.03em #ff5,
+			-0.01em 0.01em #333, -0.02em 0.02em #333, -0.03em 0.03em #333,
+			-0.04em 0.04em #333, -0.01em -0.01em 0.03em #000, -0.02em -0.02em 0.03em #000,
+			-0.03em -0.03em 0.03em #000;
+		transform: translateY(-0.025em) translateX(0.04em);
+	}
+}
+
+.outline {
+	background-clip: text;
+	color: #ffdd40;
+	animation: outline 1s ease-in-out 2.5s forwards;
+}
+
+@keyframes outline {
+	from {
+		text-shadow: 0em -7em 10em #fff;
+	}
+	to {
+		text-shadow: 0 0.02em #fff, 0.02em 0 #fff, -0.02em 0 #fff, 0 -0.02em #fff;
+	}
+}
+
+.menu-wrapper {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	margin-left: 5%;
+	z-index: 999;
+    width: 0;
+}
+
+.menu-action {
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 5%;
+	width: 50px;
+	height: 50px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: #C9F24F;
+	cursor: pointer;
+}
+
+.menu {
+	display: flex;
+	transform: scale(.7);
+	transition: all .5s;
+}
+
+.show {
+	/* display: flex!important; */
+    width: auto;
+	transform: scaleY(1)!important;
+}
+
+.menu-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+}
+
+.menu-right {
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	margin-left: 50px;
+	white-space: nowrap;
+	justify-content: space-between;
+	color: #C9F24F;
+	font-family: 'DSTRKT';
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.menu-right div {
+	user-select: none;
+	cursor: pointer;
+}
+
+.menu .menu-bullet {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #C9F24F;
+}
+
+.menu .menu-line {
+	width: 2px;
+	height: 10vh;
+	background-color: #C9F24F;
+}
+
+.signup {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	width: 500px;
+	height: 387px;
+	justify-content: space-between;
+	background-color: #C9F24F;
+	opacity: 0;
+}
+.signup .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 30px;
+	height: 30px;
+	margin: auto;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 30px;
+	font-weight: 300;
+	background-color: rgba(100, 100, 100, 0.5);
+	user-select: none;
+	cursor: pointer;
+  }
+.signup h2 {
+	font-family: 'DSTRKT';
+	font-size: 50px;
+	color: white;
+	padding: 3%;
+}
+.signup div {
+	display: flex;
+	flex-direction: column;
+}
+.signup input {
+	margin: 3%;
+	padding: 5%;
+	color: black;
+	text-align: center;
+}
+
+.signup #submit {
+	width: 60%;
+	margin: auto;
+	padding: 3%;
+	color: white;
+	background-color: black;
+}
+
+@media only screen and (max-width: 850px) {
+	.modal {
+	  width: 80%;
+	}
+
+	.menu-action {
+		display: flex;
+	}
+
+	.menu {
+		/* display: none; */
+		transform: scaleY(0);
+	}
+
+    div.body {
+        font-size: .8rem;
+    }
+  }
