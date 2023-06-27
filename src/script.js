@@ -16,7 +16,7 @@ import { CSS3DRenderer, CSS3DObject } from "three/addons/renderers/CSS3DRenderer
 
 import { gsap } from "gsap";
 
-import * as CONSTANTS from './data/constants.js';
+import * as CONSTANT from './data/constants.js';
 import TextScramble from "./scripts/textScramble.js";
 
 /**
@@ -65,7 +65,7 @@ orbitControls.maxPolarAngle = 1.6;
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
 
-for (light of CONSTANTS.SPOT_LIGHTS) {
+for (const light of CONSTANT.SPOT_LIGHTS) {
     const spotLight = new THREE.SpotLight(...light.params);
     spotLight.position.set(...light.position);
     const target = new THREE.Object3D();
@@ -126,8 +126,8 @@ const outlineParams = {
 }
 
 outlinePass.edgeStrength = outlineParams.edgeStrength;
-outlinePass.edgeGlow = outlineParam.edgeGlow;
-outlinePass.edgeThickness = outlineParam.edgeThickness;
+outlinePass.edgeGlow = outlineParams.edgeGlow;
+outlinePass.edgeThickness = outlineParams.edgeThickness;
 outlinePass.pulsePeriod = outlineParams.pulsePeriod;
 outlinePass.visibleEdgeColor = outlineParams.visibleEdgeColor;
 outlinePass.hiddenEdgeColor = outlineParams.hiddenEdgeColor;
@@ -153,15 +153,6 @@ let STATUS = "ACTIVE";
 // Timeout intervals for loading text
 let initInterval, loadInterval, mainInterval;
 let count = 2;
-
-// Start showing loading text...
-{
-    const div = document.createElement("div");
-    document.querySelector(".loading-screen .body").append(div);
-    const fx = new TextScramble(div);
-}
-
-
 
 /**
  * Models
@@ -204,7 +195,7 @@ manager.onProgress = function (url, itemsLoaded, itemsTotal) {
             const tmpLine = document.createElement("div");
             tmpLine.innerHTML = "<br />";
             document.querySelector(".loading-screen .body").append(tmpLine);
-            const el = document.createElement("div");
+            const div = document.createElement("div");
             document.querySelector(".loading-screen .body").append(div);
             const fx = new TextScramble(div);
             fx.setText(CONSTANT.LOADING_TEXT[count]);
@@ -223,6 +214,10 @@ dracoLoader.setDecoderPath("/draco/");
 const gltfLoader = new GLTFLoader(manager);
 gltfLoader.setDRACOLoader(dracoLoader);
 
+// Start showing loading text...
+const div = document.createElement("div");
+document.querySelector(".loading-screen .body").append(div);
+const fx = new TextScramble(div);
 fx.setText(CONSTANT.LOADING_TEXT[0]).then(() => {
     // Load main model
     gltfLoader.load("/models/scifi_billboards.glb", (gltf) => {
@@ -302,9 +297,9 @@ function itemClickEvent(name) {
         case "billboard_exclusivedrops":
             gsap.to(camera.position, {
                 duration: 1,
-                x: CONSTANTS.POSITION.position_exclusive_drop.x,
-                y: CONSTANTS.POSITION.position_exclusive_drop.y,
-                z: CONSTANTS.POSITION.position_exclusive_drop.z,
+                x: CONSTANT.POSITION.position_exclusive_drop.x,
+                y: CONSTANT.POSITION.position_exclusive_drop.y,
+                z: CONSTANT.POSITION.position_exclusive_drop.z,
                 onComplete: () => {
                     scene.getObjectByName("billboard_update_title003").visible = true;
                     scene.getObjectByName("billboard_text0_exclusivedrops").visible = false;
@@ -314,18 +309,18 @@ function itemClickEvent(name) {
             });
             gsap.to(orbitControls.target, {
                 duration: 1,
-                x: building.getObjectByName("billboard_exclusivedrops").position.x,
-                y: building.getObjectByName("billboard_exclusivedrops").position.y,
-                z: building.getObjectByName("billboard_exclusivedrops").position.z,
+                x: scene.getObjectByName("billboard_exclusivedrops").position.x,
+                y: scene.getObjectByName("billboard_exclusivedrops").position.y,
+                z: scene.getObjectByName("billboard_exclusivedrops").position.z,
             });
             break;
 
         case "billboard_communityvibes":
             gsap.to(camera.position, {
                 duration: 1,
-                x: CONSTANTS.POSITION.position_community.x,
-                y: CONSTANTS.POSITION.position_community.y,
-                z: CONSTANTS.POSITION.position_community.z,
+                x: CONSTANT.POSITION.position_community.x,
+                y: CONSTANT.POSITION.position_community.y,
+                z: CONSTANT.POSITION.position_community.z,
                 onComplete: () => {
                     scene.getObjectByName("billboard_update_title001").visible = true;
                     scene.getObjectByName("billboard_text0_communityvibes").visible = false;
@@ -335,17 +330,17 @@ function itemClickEvent(name) {
             });
             gsap.to(orbitControls.target, {
                 duration: 1,
-                x: building.getObjectByName("billboard_communityvibes").position.x,
-                y: building.getObjectByName("billboard_communityvibes").position.y,
-                z: building.getObjectByName("billboard_communityvibes").position.z,
+                x: scene.getObjectByName("billboard_communityvibes").position.x,
+                y: scene.getObjectByName("billboard_communityvibes").position.y,
+                z: scene.getObjectByName("billboard_communityvibes").position.z,
             });
 
         case "billboard_signup":
             gsap.to(camera.position, {
                 duration: 1,
-                x: CONSTANTS.POSITION.position_signup.x,
-                y: CONSTANTS.POSITION.position_signup.y,
-                z: CONSTANTS.POSITION.position_signup.z,
+                x: CONSTANT.POSITION.position_signup.x,
+                y: CONSTANT.POSITION.position_signup.y,
+                z: CONSTANT.POSITION.position_signup.z,
                 onComplete: () => {
                     STATUS = "DISABLE";
                     signupDiv.style.opacity = 0;
@@ -354,18 +349,18 @@ function itemClickEvent(name) {
             });
             gsap.to(orbitControls.target, {
                 duration: 1,
-                x: building.getObjectByName("billboard_signup").position.x,
-                y: building.getObjectByName("billboard_signup").position.y,
-                z: building.getObjectByName("billboard_signup").position.z,
+                x: scene.getObjectByName("billboard_signup").position.x,
+                y: scene.getObjectByName("billboard_signup").position.y,
+                z: scene.getObjectByName("billboard_signup").position.z,
             });
             break
 
         case "billboard_insideraccess":
             gsap.to(camera.position, {
                 duration: 1,
-                x: CONSTANTS.POSITION.position_insider_access.x,
-                y: CONSTANTS.POSITION.position_insider_access.y,
-                z: CONSTANTS.POSITION.position_insider_access.z,
+                x: CONSTANT.POSITION.position_insider_access.x,
+                y: CONSTANT.POSITION.position_insider_access.y,
+                z: CONSTANT.POSITION.position_insider_access.z,
                 onComplete: () => {
                     scene.getObjectByName("billboard_update_title002").visible = true;
                     scene.getObjectByName("billboard_text0_inneraccess").visible = false;
@@ -375,9 +370,9 @@ function itemClickEvent(name) {
             });
             gsap.to(orbitControls.target, {
                 duration: 1,
-                x: building.getObjectByName("billboard_insideraccess").position.x,
-                y: building.getObjectByName("billboard_insideraccess").position.y,
-                z: building.getObjectByName("billboard_insideraccess").position.z,
+                x: scene.getObjectByName("billboard_insideraccess").position.x,
+                y: scene.getObjectByName("billboard_insideraccess").position.y,
+                z: scene.getObjectByName("billboard_insideraccess").position.z,
             });
             break
 
@@ -404,8 +399,8 @@ document.querySelector("#community").addEventListener("click", (event) => {
 
 document.querySelector(".menu-action").addEventListener("click", (event) => {
     document.querySelector(".menu").classList.contains("show")
-        ? (document.querySelector(".menu-action").innerHTML = CONSTANTS.HTML_CONTENT.menuSVG)
-        : (document.querySelector(".menu-action").innerHTML = CONSTANTS.HTML_CONTENT.timesSVG);
+        ? (document.querySelector(".menu-action").innerHTML = CONSTANT.HTML_CONTENT.menuSVG)
+        : (document.querySelector(".menu-action").innerHTML = CONSTANT.HTML_CONTENT.timesSVG);
     document.querySelector(".menu").classList.toggle("show");
 });
 
@@ -633,7 +628,7 @@ const animate = () => {
     try {
         scene.getObjectByName("rounding_caption_top").rotation.z += 0.008;
         scene.getObjectByName("rounding_caption_down").rotation.z += 0.01;
-    } catch {}
+    } catch { }
 
     // Render Scene
     // renderer.render(scene, camera);
