@@ -133,8 +133,23 @@ outlinePass.visibleEdgeColor = outlineParams.visibleEdgeColor;
 outlinePass.hiddenEdgeColor = outlineParams.hiddenEdgeColor;
 outlinePass.pulseSpeed = outlineParams.pulseSpeed;
 
+const mixPass = new ShaderPass(
+    new THREE.ShaderMaterial({
+        uniforms: {
+            baseTexture: { value: null },
+            bloomTexture: { value: bloomComposer.renderTarget2.texture },
+        },
+        vertexShader: CONSTANT.SHADERS.vertexShader,
+        fragmentShader: CONSTANT.SHADERS.fragmentShader,
+        defines: {},
+    }),
+    "baseTexture"
+);
+mixPass.needsSwap = true;
+
 const finalComposer = new EffectComposer(renderer);
 finalComposer.addPass(renderScene);
+finalComposer.addPass(mixPass);
 finalComposer.addPass(outputPass);
 finalComposer.addPass(outlinePass);
 
@@ -574,7 +589,7 @@ window.addEventListener("resize", () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
-    cssRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // cssRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
 /**
