@@ -1,4 +1,5 @@
-# Three.js Journey
+# DSTRKT
+# Landing Page
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
