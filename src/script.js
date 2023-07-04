@@ -306,6 +306,19 @@ function itemClickEvent(name) {
 
     orbitControls.enabled = false;
 
+    scene.getObjectByName("billboard_update_title003").visible = false;
+    scene.getObjectByName("billboard_text0_exclusivedrops").visible = true;
+    scene.getObjectByName("billboard_update_text_exclusivedrops").visible = false;
+    scene.getObjectByName("billboard_cross_exclusivedrops").visible = false;
+    scene.getObjectByName("billboard_update_title002").visible = false;
+    scene.getObjectByName("billboard_text0_inneraccess").visible = true;
+    scene.getObjectByName("billboard_update_text_inneraccess").visible = false;
+    scene.getObjectByName("billboard_cross_inneraccess").visible = false;
+    scene.getObjectByName("billboard_update_title001").visible = false;
+    scene.getObjectByName("billboard_text0_communityvibes").visible = true;
+    scene.getObjectByName("billboard_update_text_communityvibes").visible = false;
+    scene.getObjectByName("billboard_cross_communityvibes").visible = false;
+
     if (window.getComputedStyle(document.querySelector(".menu-action")).getPropertyValue("display") == "flex" && document.querySelector(".menu").classList.contains("show")) document.querySelector(".menu-action").click();
 
     switch (name) {
@@ -349,6 +362,7 @@ function itemClickEvent(name) {
                 y: scene.getObjectByName("billboard_communityvibes").position.y,
                 z: scene.getObjectByName("billboard_communityvibes").position.z,
             });
+            break
 
         case "billboard_signup":
             gsap.to(camera.position, {
@@ -396,8 +410,8 @@ function itemClickEvent(name) {
     }
 }
 
-document.querySelector("#about").addEventListener("click", (event) => {
-    itemClickEvent("");
+document.querySelector("#signup").addEventListener("click", (event) => {
+    itemClickEvent("billboard_signup");
 });
 
 document.querySelector("#exclusive").addEventListener("click", (event) => {
