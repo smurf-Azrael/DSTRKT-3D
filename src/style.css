@@ -237,7 +237,7 @@ html {
     height: 387px;
     justify-content: space-between;
     background-color: #c9f24f;
-    opacity: 0;
+    /* opacity: 0; */
 }
 .signup .close {
     position: absolute;
@@ -326,7 +326,7 @@ html {
 
 	div.menu.show div.menu-bg {
 		display: block;
-		background-color: #0004;
+		background-color: #000b;
 		position: fixed;
 		width: 100vw;
 		height: 100vh;

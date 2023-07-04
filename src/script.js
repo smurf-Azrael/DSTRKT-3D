@@ -291,7 +291,7 @@ scene.add(groundMirror);
 // Sign Up Object
 const signupDiv = document.querySelector(".signup");
 const signupObj = new CSS3DObject(signupDiv);
-signupObj.position.set(12.291, 7.409, -2.149);
+signupObj.position.set(-1000, -1000, -1000);
 signupObj.rotation.y = (189.29 * Math.PI) / 180;
 signupObj.scale.set(0.01676, 0.01676, 1);
 
@@ -321,6 +321,8 @@ function itemClickEvent(name) {
 
     if (window.getComputedStyle(document.querySelector(".menu-action")).getPropertyValue("display") == "flex" && document.querySelector(".menu").classList.contains("show")) document.querySelector(".menu-action").click();
 
+    console.log(name, ":::: is clicked!");
+
     switch (name) {
         case "billboard_exclusivedrops":
             gsap.to(camera.position, {
@@ -329,6 +331,7 @@ function itemClickEvent(name) {
                 y: CONSTANT.POSITION.position_exclusive_drop.y,
                 z: CONSTANT.POSITION.position_exclusive_drop.z,
                 onComplete: () => {
+                    STATUS = "DISABLE";
                     scene.getObjectByName("billboard_update_title003").visible = true;
                     scene.getObjectByName("billboard_text0_exclusivedrops").visible = false;
                     scene.getObjectByName("billboard_update_text_exclusivedrops").visible = true;
@@ -350,6 +353,7 @@ function itemClickEvent(name) {
                 y: CONSTANT.POSITION.position_community.y,
                 z: CONSTANT.POSITION.position_community.z,
                 onComplete: () => {
+                    STATUS = "DISABLE";
                     scene.getObjectByName("billboard_update_title001").visible = true;
                     scene.getObjectByName("billboard_text0_communityvibes").visible = false;
                     scene.getObjectByName("billboard_update_text_communityvibes").visible = true;
@@ -373,6 +377,8 @@ function itemClickEvent(name) {
                 onComplete: () => {
                     STATUS = "DISABLE";
                     signupDiv.style.opacity = 0;
+                    signupObj.position.set(12.291, 7.409, -2.149);
+                    scene.getObjectByName("billboard_text0_signup").visible = false;
                     gsap.to(signupDiv.style, { duration: 1, opacity: 1 });
                 },
             });
@@ -391,6 +397,7 @@ function itemClickEvent(name) {
                 y: CONSTANT.POSITION.position_insider_access.y,
                 z: CONSTANT.POSITION.position_insider_access.z,
                 onComplete: () => {
+                    STATUS = "DISABLE";
                     scene.getObjectByName("billboard_update_title002").visible = true;
                     scene.getObjectByName("billboard_text0_inneraccess").visible = false;
                     scene.getObjectByName("billboard_update_text_inneraccess").visible = true;
@@ -531,7 +538,9 @@ cssRenderer.domElement.addEventListener("click", (event) => {
 });
 
 document.querySelector(".signup .close").addEventListener("click", (e) => {
-    gsap.to(signupDiv.style, { duration: 1, opacity: 0 });
+
+    scene.getObjectByName("billboard_text0_signup").visible = true;
+    gsap.to(signupDiv.style, { duration: 1, opacity: 0, onComplete: () => signupObj.position.set(-1000, -1000, -1000) });
     gsap.to(camera.position, {
         duration: 2,
         x: 0,
